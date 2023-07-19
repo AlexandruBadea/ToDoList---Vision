@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 using ToDoList.Models;
 
 namespace ToDoList.Controllers
@@ -7,20 +10,23 @@ namespace ToDoList.Controllers
     [Route("[controller]")]
     public class ToDoController : ControllerBase
     {
-        private static List<ToDoItem> _listItems { get; set; } = new List<ToDoItem>();
+        private readonly ToDoDbContext _context;
 
+        public ToDoController(ToDoDbContext context)
+        {
+            _context = context;
+        }
 
-
-        [HttpGet("getAll", Name ="GetAllToDoItems")]
+        [HttpGet("getAll", Name = "GetAllToDoItems")]
         public IEnumerable<ToDoItem> GetAll()
         {
-            return _listItems;
+            return _context.ToDoItems.ToList();
         }
 
         [HttpGet("getbyid/{id}", Name = "GetToDoItem")]
         public ActionResult<ToDoItem> GetItemById(int id)
         {
-            var item = _listItems.FirstOrDefault(x => x.Id == id);
+            var item = _context.ToDoItems.FirstOrDefault(x => x.Id == id);
             if (item == null)
             {
                 return NotFound();
@@ -31,38 +37,59 @@ namespace ToDoList.Controllers
         [HttpPost("create")]
         public IActionResult CreateItem(ToDoItem item)
         {
-            _listItems.Add(item);
-            return CreatedAtRoute("GetToDoItem", new { id = item.Id}, item);
+            _context.ToDoItems.Add(item);
+            _context.SaveChanges();
+
+            return CreatedAtRoute("GetToDoItem", new { id = item.Id }, item);
         }
 
         [HttpPut("update/{id}")]
         public IActionResult Update(int id, ToDoItem item)
         {
-            var filter = _listItems.FirstOrDefault(x => x.Id == id);
-            if (item == null)
+            var existingItem = _context.ToDoItems.FirstOrDefault(x => x.Id == id);
+            if (existingItem == null)
             {
                 return NotFound();
             }
 
-            filter.Title = item.Title;
-            filter.Description = item.Description;
-            filter.isCompleted = item.isCompleted;
+            existingItem.Title = item.Title;
+            existingItem.Description = item.Description;
+            existingItem.isCompleted = item.isCompleted;
 
-            return CreatedAtRoute("GetToDoItem", new { i = item.Id }, item); ;
+            _context.SaveChanges();
+
+            return CreatedAtRoute("GetToDoItem", new { id = existingItem.Id }, existingItem);
         }
 
         [HttpDelete("delete/{id}")]
         public IActionResult Delete(int id)
         {
-            var item = _listItems.FirstOrDefault(x => x.Id == id);
+            var item = _context.ToDoItems.FirstOrDefault(x => x.Id == id);
             if (item == null)
             {
                 return NotFound();
             }
 
-            _listItems.Remove(item);
+            _context.ToDoItems.Remove(item);
+            _context.SaveChanges();
+
             return NoContent();
         }
-    
+
+        [HttpPut("markCompleted/{id}")]
+        public IActionResult MarkCompleted(int id)
+        {
+            var item = _context.ToDoItems.FirstOrDefault(x => x.Id == id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            item.isCompleted = true;
+            _context.SaveChanges();
+
+            return Ok(item);
+        }
+
     }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Vision\\ToDoList\\ToDoList\\ToDoList.csproj": {}
+    "E:\\Vision\\ToDoList---Vision\\ToDoList\\ToDoList.csproj": {}
   },
   "projects": {
-    "E:\\Vision\\ToDoList\\ToDoList\\ToDoList.csproj": {
+    "E:\\Vision\\ToDoList---Vision\\ToDoList\\ToDoList.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Vision\\ToDoList\\ToDoList\\ToDoList.csproj",
+        "projectUniqueName": "E:\\Vision\\ToDoList---Vision\\ToDoList\\ToDoList.csproj",
         "projectName": "ToDoList",
-        "projectPath": "E:\\Vision\\ToDoList\\ToDoList\\ToDoList.csproj",
+        "projectPath": "E:\\Vision\\ToDoList---Vision\\ToDoList\\ToDoList.csproj",
         "packagesPath": "C:\\Users\\Sandu\\.nuget\\packages\\",
-        "outputPath": "E:\\Vision\\ToDoList\\ToDoList\\obj\\",
+        "outputPath": "E:\\Vision\\ToDoList---Vision\\ToDoList\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
