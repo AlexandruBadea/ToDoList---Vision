@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+.navbar{
+    background-color: rgb(56, 56, 56)
+}
+
+.navbar-brand{
+    color: aliceblue;
+    font-family: 'Indie Flower', cursive;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.navbar-brand:hover{
+    color: aliceblue;
+}
+
+h3{
+    text-align: center;
+    font-family: 'Kanit', sans-serif;
+    font-weight: bold;
+}
+
+.delConfText{
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.btn{
+    margin-top: 15px;
+    text-align: center;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+h4{
+    text-align: center;
+    font-family: 'Kanit', sans-serif;
+    text-transform: uppercase;
+}
+
+.btn-success{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.btn-warning{
+    color: azure;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.btn-primary{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.btn-danger{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.btn-warning:hover{
+    color: azure;
+}
+
+.card{
+    min-width: 200px;
+}
+
+.modal-content{
+    min-height: 170px;
+}
+
+.display-none{
+    display: none;
+}
