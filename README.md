@@ -1,4 +1,5 @@
-[img]https://i.ibb.co/J5pg2VP/Screenshot-8.jpg[/img]
-[img]https://i.ibb.co/MMDmwd6/Screenshot-9.jpg[/img]
-[img]https://i.ibb.co/fxgN5FG/Screenshot-10.jpg[/img]
-[img]https://i.ibb.co/tsXqcLH/Screenshot-11.jpg[/img]
+#Screenshots
+https://prnt.sc/DVbCByZa_XRl
+https://prnt.sc/BpM9bLekLc9X
+https://prnt.sc/OG0Q5_LFX3lV
+https://prnt.sc/QQATlVScvq7y
