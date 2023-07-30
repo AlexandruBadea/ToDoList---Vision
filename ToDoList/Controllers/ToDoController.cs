@@ -17,13 +17,13 @@ namespace ToDoList.Controllers
             _context = context;
         }
 
-        [HttpGet("getAll", Name = "GetAllToDoItems")]
+        [HttpGet("api/getAll", Name = "GetAllToDoItems")]
         public IEnumerable<ToDoItem> GetAll()
         {
             return _context.ToDoItems.ToList();
         }
 
-        [HttpGet("getbyid/{id}", Name = "GetToDoItem")]
+        [HttpGet("api/getbyid/{id}", Name = "GetToDoItem")]
         public ActionResult<ToDoItem> GetItemById(int id)
         {
             var item = _context.ToDoItems.FirstOrDefault(x => x.Id == id);
@@ -34,7 +34,7 @@ namespace ToDoList.Controllers
             return item;
         }
 
-        [HttpPost("create")]
+        [HttpPost("api/create")]
         public IActionResult CreateItem(ToDoItem item)
         {
             _context.ToDoItems.Add(item);
@@ -43,7 +43,7 @@ namespace ToDoList.Controllers
             return CreatedAtRoute("GetToDoItem", new { id = item.Id }, item);
         }
 
-        [HttpPut("update/{id}")]
+        [HttpPut("api/update/{id}")]
         public IActionResult Update(int id, ToDoItem item)
         {
             var existingItem = _context.ToDoItems.FirstOrDefault(x => x.Id == id);
@@ -61,7 +61,7 @@ namespace ToDoList.Controllers
             return CreatedAtRoute("GetToDoItem", new { id = existingItem.Id }, existingItem);
         }
 
-        [HttpDelete("delete/{id}")]
+        [HttpDelete("api/delete/{id}")]
         public IActionResult Delete(int id)
         {
             var item = _context.ToDoItems.FirstOrDefault(x => x.Id == id);
@@ -76,7 +76,7 @@ namespace ToDoList.Controllers
             return NoContent();
         }
 
-        [HttpPut("markCompleted/{id}")]
+        [HttpPut("api/markCompleted/{id}")]
         public IActionResult MarkCompleted(int id)
         {
             var item = _context.ToDoItems.FirstOrDefault(x => x.Id == id);
@@ -86,6 +86,21 @@ namespace ToDoList.Controllers
             }
 
             item.isCompleted = true;
+            _context.SaveChanges();
+
+            return Ok(item);
+        }
+
+        [HttpPut("api/markUncompleted/{id}")]
+        public IActionResult MarkUncompleted(int id)
+        {
+            var item = _context.ToDoItems.FirstOrDefault(x => x.Id == id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            item.isCompleted = false;
             _context.SaveChanges();
 
             return Ok(item);
