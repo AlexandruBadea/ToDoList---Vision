@@ -12,35 +12,78 @@
 </head>
 
 <body>
+    <!-- Alerts -->
+    <div aria-live="polite" aria-atomic="true" class="position-relative">
+        <div class="toast-container top-0 end-0 p-3">
+
+            <div class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive"
+                aria-atomic="true" id="addedAlert">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <i class="bi bi-cloud-plus"></i> The task has been successfully added!
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+            </div>
+
+            <div class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive"
+                aria-atomic="true" id="completedAlert">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <i class="bi bi-check2-circle"></i> The task has been marked as completed!
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+            </div>
+
+            <div class="toast align-items-center text-bg-warning border-0" role="alert" aria-live="assertive"
+                aria-atomic="true" id="editedAlert">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <i class="bi bi-pencil-square"></i> The task has been successfully edited!
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+            </div>
+
+            <div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive"
+                aria-atomic="true" id="uncompletedAlert">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <i class="bi bi-x-square"></i> The task has been marked as uncompleted!
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+            </div>
+
+            <div class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive"
+                aria-atomic="true" id="deletedAlert">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <i class="bi bi-trash"></i> The task has been successfully deleted!
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Alerts -->
+
+
+
+
 
     <nav class="navbar">
         <a class="navbar-brand position-relative start-50 translate-middle-x" href="#"><i
                 class="bi bi-card-checklist"></i> ToDoList</a>
     </nav>
 
-    <div class="container-fluid mt-3">
-        <!-- Alerts -->
-        <div data-mdb-delay="3000" class="alert alert-primary alert-dismissible fade display-none show" role="alert"
-            id="uncompletedAlert">
-            <i class="bi bi-x-square"></i> <strong>The task has been marked as uncompleted!</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <div data-mdb-delay="3000" class="alert alert-success alert-dismissible fade display-none show" role="alert"
-            id="completedAlert">
-            <i class="bi bi-check2-square"></i> <strong>The task has been marked as completed!</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <div data-mdb-delay="3000" class="alert alert-danger alert-dismissible fade display-none show" role="alert"
-            id="deletedAlert">
-            <i class="bi bi-trash"></i> <strong>The task has been deleted!</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <div data-mdb-delay="3000" class="alert alert-warning alert-dismissible fade display-none show" role="alert"
-            id="editedAlert">
-            <i class="bi bi-pencil-square"></i> <strong>The task has been successfully edited!</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    </div>
 
     <div class="container position-relative">
         <div class="row">
@@ -57,14 +100,24 @@
                         style="height: 100px"></textarea>
                     <label for="floatingTextarea2">Description</label>
                 </div>
+                <p class="addError" id="addError"></p>
                 <button type="button" id="addTask"
-                    class="btn btn-success position-absolute start-50 translate-middle"><i class="bi bi-plus-lg"></i>
-                    Add Task</button>
+                    class="btn btn-success position-absolute start-50 translate-middle btn-task"><i
+                        class="bi bi-plus-lg"></i>Add
+                    Task</button>
+
             </div>
             <div class="col"></div>
         </div>
+
     </div>
+
     <div class="container-fluid mb-3">
+        <br><br>
+        <h4>or</h4>
+        <button type="button" id="searchButton"
+            class="btn btn-info position-absolute start-50 translate-middle btn-task"><i class="bi bi-search"></i>
+            Search by ID</button>
         <br><br>
         <div class="row">
             <!-- Uncompleted -->
@@ -78,14 +131,30 @@
             <!-- Completed -->
             <div class="col">
                 <h4>Completed</h4>
-                <div class="row row-cols-1 row-cols-lg-3 g-1 g-lg-2" id="completedTasks">
+                <div class="row row-cols-1 row-cols-lg-3 g-1 g-lg-1" id="completedTasks">
                     <!-- Completed tasks -->
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal -->
+
+    <!-- Read more Modal -->
+    <div class="modal fade" id="readMoreModal" tabindex="-1" aria-labelledby="readMoreModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body position-relative">
+                    <h3 id="readMoreTitle"></h3>
+                    <p id="readMoreDescription" class="delConfText"></p>
+                    <button type="button" class="btn btn-danger position-relative start-50 translate-middle-x"
+                        data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Confirmation Modal -->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -129,12 +198,29 @@
         </div>
     </div>
 
+    <!-- Search Modal -->
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title fs-5">Search task by ID</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search..." id="searchInput">
+                        <button class="btn btn-outline-secondary" id="searchButtonConfirm"><i
+                                class="bi bi-search"></i></button>
+                    </div>
+                    <div class="searchError">
+                        <p id="searchError"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script src="scripts/api.js"></script>
 </body>
 
